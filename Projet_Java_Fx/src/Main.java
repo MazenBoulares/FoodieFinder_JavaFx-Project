@@ -10,11 +10,19 @@ public class Main {
 
         // Test ajout resto
 
-        Restaurant restaurantToAdd = new Restaurant("Pizzaria 1","Borj Cedria","bnina",4.5);
+        Restaurant restaurantToAdd = new Restaurant("Pizzaria 2","Borj Cedria","bnina",4.5);
+        Restaurant restaurantToAdd2 = new Restaurant("MAchwa","jandouba","mele7",3.6);
+        Restaurant restaurantToAdd3 = new Restaurant("Pizzaria 4","Bizerte","bnina",48.2);
+        Restaurant restaurantToAdd4 = new Restaurant("Sushi","Hlif","bnina",98.5);
+
 
 
         try {
             restaurantService.ajouter(restaurantToAdd);
+            restaurantService.ajouter(restaurantToAdd2);
+            restaurantService.ajouter(restaurantToAdd3);
+            restaurantService.ajouter(restaurantToAdd4);
+
             System.out.println("ajoutée");
         } catch (SQLException e) {
             System.out.println("Erreur ajout: " + e.getMessage());

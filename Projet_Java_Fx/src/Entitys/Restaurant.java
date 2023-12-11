@@ -5,19 +5,31 @@ public class Restaurant {
     private String nomRestaurant;
     private String adresseRestaurant;
     private String description;
+
+    private boolean isApproved;
     private Double noteMoyenne;
 
-//nzidou attribut nchouf si accepted or not
+
+    private User manager;
+
+    
+
+
 
     public Restaurant() {
 
     }
 
-    public Restaurant(String nomRestaurant, String adresseRestaurant, String description, Double noteMoyenne) {
+    public Restaurant(String nomRestaurant, String adresseRestaurant, String description, Double noteMoyenne
+//                      User user
+
+    ) {
         this.nomRestaurant = nomRestaurant;
         this.adresseRestaurant = adresseRestaurant;
         this.description = description;
         this.noteMoyenne = noteMoyenne;
+        this.isApproved=false;
+       // this.manager=user;
     }
 
 
@@ -27,6 +39,7 @@ public class Restaurant {
         this.adresseRestaurant = adresseRestaurant;
         this.description = description;
         this.noteMoyenne = noteMoyenne;
+      this.isApproved=false;
     }
 
 
@@ -71,6 +84,15 @@ public class Restaurant {
         this.noteMoyenne = noteMoyenne;
     }
 
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
+
+
     @Override
     public String toString() {
         return "Restaurant{" +
@@ -78,6 +100,7 @@ public class Restaurant {
                 ", nomRestaurant='" + nomRestaurant + '\'' +
                 ", adresseRestaurant='" + adresseRestaurant + '\'' +
                 ", description='" + description + '\'' +
+                ", isApproved=" + isApproved +
                 ", noteMoyenne=" + noteMoyenne +
                 '}';
     }
