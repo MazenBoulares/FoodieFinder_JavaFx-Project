@@ -4,11 +4,14 @@ public class Plat {
     int id ;
     String nom;
     String description ;
+    int restaurantID;
 
-    public Plat(int id , String nom, String description){
+    public Plat(int id,int RestaurantId , String nom, String description){
         this.id =  id ;
         this.nom = nom;
         this.description = description;
+        this.restaurantID = RestaurantId;
+
     }
 
     public int getId(){
@@ -16,6 +19,9 @@ public class Plat {
     }
     public String getNom(){
         return this.nom;
+    }
+    public int getRestaurantID(){
+        return 1;
     }
     public String getDescription(){
         return this.description;
