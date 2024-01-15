@@ -1,0 +1,29 @@
+/* styles.css */
+
+.nav-bar {
+    -fx-background-color: #ff6666; /* Salmon color */
+    -fx-padding: 10;
+    -fx-spacing: 20;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.nav-logo {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: #35424a; /* Dark color for contrast */
+}
+.restaurant-cell {
+    -fx-spacing: 10;
+    -fx-padding: 10;
+    -fx-border-width: 1;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+}
+
+.delete-button {
+    -fx-background-color: #ff6666;
+    -fx-text-fill: white;
+    -fx-padding: 5 10;
+    -fx-border-width: 0;
+    -fx-border-radius: 5;
+}
