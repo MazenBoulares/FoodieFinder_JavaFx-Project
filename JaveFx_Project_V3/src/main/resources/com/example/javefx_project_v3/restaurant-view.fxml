@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.javefx_project_v3.Controllers.RestaurantController">
-
-    <!-- Modern Navigation Bar -->
-    <HBox styleClass="nav-bar">
-        <Label text="Foodie Finder" styleClass="nav-logo"/>
-        <!-- Add more buttons for other navigation items if needed -->
-        <Button text="Home"/>
-        <Button text="About"/>
-        <Button text="Contact"/>
-    </HBox>
-
-    <HBox spacing="10">
-        <!-- Side menu for managing restaurants -->
-        <VBox styleClass="side-menu">
-            <Button text="Manage Restaurants" />
-            <!-- Add more buttons for other actions if needed -->
-        </VBox>
-
-        <!-- Main content area -->
-        <VBox spacing="10">
-            <ListView fx:id="restaurantListView"/>
-            <HBox spacing="10">
-                <TextField fx:id="nomTextField" promptText="Nom"/>
-                <TextField fx:id="adresseTextField" promptText="Adresse"/>
-                <TextField fx:id="descriptionTextField" promptText="Description"/>
-                <TextField fx:id="noteMoyenneTextField" promptText="Note Moyenne"/>
-                <Button text="Add Restaurant" onAction="#handleAddRestaurant"/>
-            </HBox>
-        </VBox>
-    </HBox>
-</VBox>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@ManageClubs.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javefx_project_v3.Controllers.RestaurantController" >
+    <children>
+<!--        <VBox fx:id="local" layoutY="1.0" prefHeight="750.0" prefWidth="250.0" styleClass="new_local_container">-->
+<!--            <children>-->
+<!--                <Label text="clubName" />-->
+<!--                <TextField fx:id="club_name_fid" />-->
+<!--                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="clubDescription" />-->
+<!--                <TextField fx:id="club_description_fid" prefHeight="250.0" prefWidth="223.0" />-->
+<!--                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="foundingDate" />-->
+<!--                <DatePicker fx:id="founding_date_fid" prefHeight="39.0" prefWidth="232.0" />-->
+<!--                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="clubEmail" />-->
+<!--                <TextField fx:id="club_email_fid" />-->
+<!--                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="clubState" />-->
+<!--                <TextField fx:id="club_state_fid" />-->
+<!--                <Button fx:id="save_btn_fid" mnemonicParsing="false" styleClass="save_button" text="Save" />-->
+<!--                <Button fx:id="update_btn_fid" mnemonicParsing="false" styleClass="update_button" text="Update" />-->
+<!--                <Button fx:id="delete_btn_fid" mnemonicParsing="false" text="Delete" />-->
+<!--            </children>
+        </VBox>-->
+        <AnchorPane layoutX="266.0" layoutY="14.0" prefHeight="750.0" prefWidth="600.0" styleClass="new_local_container">
+            <children>
+                <Text layoutX="27.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="page_title" text="Manage Clubs" />
+                <TableView fx:id="restaurantListView" layoutX="27.0" layoutY="146.0" prefHeight="458.0" prefWidth="547.0">
+                    <columns>
+                        <TableColumn fx:id="nomTextField" prefWidth="34.4000244140625" text="id" />
+                        <TableColumn fx:id="adresseTextField" prefWidth="50.39996337890625" text="Name" />
+                        <TableColumn fx:id="descriptionTextField" prefWidth="135.19998168945312" text="Description" />
+                        <TableColumn fx:id="descriptionTextField" prefWidth="91.20001220703125" text="foundingDate" />
+                        <TableColumn fx:id="noteMoyenneTextField" prefWidth="108.0" text="clubEmail" />
+<!--                        <TableColumn fx:id="column_president_name_fid" minWidth="0.0" prefWidth="130.4000244140625" text="President Name" />-->
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
