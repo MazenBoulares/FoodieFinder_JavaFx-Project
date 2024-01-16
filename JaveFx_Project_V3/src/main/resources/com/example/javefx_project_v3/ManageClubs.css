@@ -44,3 +44,18 @@
     -fx-font-weight: bold;
     -fx-font-family: Calibri;
 }
+
+/* Add your existing styles here */
+
+.restaurant-cell {
+    /* Customize cell styles as needed */
+}
+
+.restaurant-name-label {
+    -fx-text-fill: black; /* Customize text color */
+    /* Add other label styles as needed */
+}
+
+.delete-button {
+    /* Add button styles as needed */
+}

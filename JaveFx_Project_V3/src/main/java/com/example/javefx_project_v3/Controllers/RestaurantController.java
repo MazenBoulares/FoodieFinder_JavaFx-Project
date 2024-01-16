@@ -73,6 +73,20 @@ public class RestaurantController {
         adresseColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAdresseRestaurant()));
         descriptionColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
         noteMoyenneColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
+
+
+        
+
+
+
+
+        // Add a selection listener to handle row selection
+        restaurantTableView.getSelectionModel().
+                selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                    if (newSelection != null) {
+                        handleRestaurantSelection(newSelection);
+                    }
+                });
     }
 
     private class RestaurantTableRow extends javafx.scene.control.TableRow<Restaurant> {
@@ -85,24 +99,24 @@ public class RestaurantController {
                 setText(null);
                 setGraphic(null);
             } else {
-                HBox cell = new HBox();
-                cell.getStyleClass().add("restaurant-cell");
-
-                Button deleteButton = new Button("Delete");
-                deleteButton.getStyleClass().add("delete-button");
-                deleteButton.setOnAction(event -> handleDeleteRestaurant(restaurant));
-
-                // Customize the content to display restaurant information
-                Button nameLabel = new Button(restaurant.getNomRestaurant());
-                nameLabel.getStyleClass().add("restaurant-name-button");
-                nameLabel.setOnAction(event -> handleRestaurantSelection(restaurant));
-
-                cell.getChildren().addAll(
-                        nameLabel,
-                        deleteButton
-                );
-
-                setGraphic(cell);
+//                HBox cell = new HBox();
+//                cell.getStyleClass().add("restaurant-cell");
+//
+//                Button deleteButton = new Button("Delete");
+//                deleteButton.getStyleClass().add("delete-button");
+//                deleteButton.setOnAction(event -> handleDeleteRestaurant(restaurant));
+//
+//                // Customize the content to display restaurant information
+//                Button nameLabel = new Button(restaurant.getNomRestaurant());
+//                nameLabel.getStyleClass().add("restaurant-name-button");
+//                nameLabel.setOnAction(event -> handleRestaurantSelection(restaurant));
+//
+//                cell.getChildren().addAll(
+//                        nameLabel,
+//                        deleteButton
+//                );
+//
+//                setGraphic(cell);
             }
         }
     }

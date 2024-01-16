@@ -16,7 +16,7 @@ public class MainApplication extends Application {
 
         // Apply the CSS style
         Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("ManageClubs.css").toExternalForm());
 
         stage.setTitle("Restaurant List");
         stage.setScene(scene);
