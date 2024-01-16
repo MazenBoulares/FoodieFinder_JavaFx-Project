@@ -8,10 +8,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 
@@ -47,40 +49,55 @@ public class RestaurantController {
     @FXML
     private TableColumn<Restaurant, Double> noteMoyenneColumn;
 
+    @FXML
+    private TableColumn<Restaurant, Void> operationsColumn;
+
     private final ServiceRestaurant serviceRestaurant = new ServiceRestaurant();
 
     @FXML
     public void initialize() {
-        // Set up your service to get the list of restaurants
         ObservableList<Restaurant> restaurantList = FXCollections.observableArrayList();
 
         try {
-            // Sample data (replace this with data from your service)
             restaurantList.addAll(serviceRestaurant.readAll());
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately
         }
 
-        // Set cell factory to customize each cell in the TableView
         restaurantTableView.setRowFactory(param -> new RestaurantTableRow());
 
-        // Set data to the TableView
         restaurantTableView.setItems(restaurantList);
 
-        // Set cell value factories for each column
         idColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getRestaurantID()));
         nomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNomRestaurant()));
         adresseColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAdresseRestaurant()));
         descriptionColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
         noteMoyenneColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
 
-
-        
-
-
+        operationsColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button deleteButton = new Button("Delete");
 
 
-        // Add a selection listener to handle row selection
+            {
+                deleteButton.getStyleClass().add("delete-button");
+                deleteButton.setOnAction(event -> {
+
+                    Restaurant restaurant = getTableView().getItems().get(getIndex());
+                    handleDeleteRestaurant(restaurant);
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(deleteButton);
+                }
+            }
+        });
+
         restaurantTableView.getSelectionModel().
                 selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                     if (newSelection != null) {
@@ -99,24 +116,7 @@ public class RestaurantController {
                 setText(null);
                 setGraphic(null);
             } else {
-//                HBox cell = new HBox();
-//                cell.getStyleClass().add("restaurant-cell");
-//
-//                Button deleteButton = new Button("Delete");
-//                deleteButton.getStyleClass().add("delete-button");
-//                deleteButton.setOnAction(event -> handleDeleteRestaurant(restaurant));
-//
-//                // Customize the content to display restaurant information
-//                Button nameLabel = new Button(restaurant.getNomRestaurant());
-//                nameLabel.getStyleClass().add("restaurant-name-button");
-//                nameLabel.setOnAction(event -> handleRestaurantSelection(restaurant));
-//
-//                cell.getChildren().addAll(
-//                        nameLabel,
-//                        deleteButton
-//                );
-//
-//                setGraphic(cell);
+                // Handle the display of the row data (if needed)
             }
         }
     }
