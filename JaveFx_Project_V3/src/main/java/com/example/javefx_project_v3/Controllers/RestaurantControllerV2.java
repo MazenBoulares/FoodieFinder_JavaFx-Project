@@ -2,20 +2,17 @@ package com.example.javefx_project_v3.Controllers;
 
 import com.example.javefx_project_v3.Entitys.Restaurant;
 import com.example.javefx_project_v3.Services.ServiceRestaurant;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
 import java.sql.SQLException;
 
-public class RestaurantController {
+public class RestaurantControllerV2 {
 
     @FXML
     private TableView<Restaurant> restaurantTableView;
@@ -32,47 +29,20 @@ public class RestaurantController {
     @FXML
     private TextField noteMoyenneTextField;
 
-    @FXML
-    private TableColumn<Restaurant, Long> idColumn;
-
-    @FXML
-    private TableColumn<Restaurant, String> nomColumn;
-
-    @FXML
-    private TableColumn<Restaurant, String> adresseColumn;
-
-    @FXML
-    private TableColumn<Restaurant, String> descriptionColumn;
-
-    @FXML
-    private TableColumn<Restaurant, Double> noteMoyenneColumn;
-
     private final ServiceRestaurant serviceRestaurant = new ServiceRestaurant();
 
     @FXML
     public void initialize() {
-        // Set up your service to get the list of restaurants
         ObservableList<Restaurant> restaurantList = FXCollections.observableArrayList();
 
         try {
-            // Sample data (replace this with data from your service)
             restaurantList.addAll(serviceRestaurant.readAll());
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            e.printStackTrace();
         }
 
-        // Set cell factory to customize each cell in the TableView
         restaurantTableView.setRowFactory(param -> new RestaurantTableRow());
-
-        // Set data to the TableView
         restaurantTableView.setItems(restaurantList);
-
-        // Set cell value factories for each column
-        idColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getRestaurantID()));
-        nomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNomRestaurant()));
-        adresseColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAdresseRestaurant()));
-        descriptionColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
-        noteMoyenneColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
     }
 
     private class RestaurantTableRow extends javafx.scene.control.TableRow<Restaurant> {
@@ -92,7 +62,6 @@ public class RestaurantController {
                 deleteButton.getStyleClass().add("delete-button");
                 deleteButton.setOnAction(event -> handleDeleteRestaurant(restaurant));
 
-                // Customize the content to display restaurant information
                 Button nameLabel = new Button(restaurant.getNomRestaurant());
                 nameLabel.getStyleClass().add("restaurant-name-button");
                 nameLabel.setOnAction(event -> handleRestaurantSelection(restaurant));
@@ -171,3 +140,4 @@ public class RestaurantController {
         noteMoyenneTextField.clear();
     }
 }
+
