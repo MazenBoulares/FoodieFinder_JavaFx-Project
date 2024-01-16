@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 
 import java.sql.SQLException;
 
-public class RestaurantController {
+public class secondController {
 
     @FXML
     private TableView<Restaurant> restaurantTableView;
@@ -121,37 +121,6 @@ public class RestaurantController {
         }
 
         // Clear the input fields after adding
-        nomTextField.clear();
-        adresseTextField.clear();
-        descriptionTextField.clear();
-        noteMoyenneTextField.clear();
-    }
-
-    @FXML
-    private void handleUpdateRestaurant() {
-        // Handle the update action here
-        String nom = nomTextField.getText();
-        String adresse = adresseTextField.getText();
-        String description = descriptionTextField.getText();
-        double noteMoyenne = Double.parseDouble(noteMoyenneTextField.getText());
-
-        Restaurant updatedRestaurant = new Restaurant(nom, adresse, description, noteMoyenne);
-
-        try {
-            // Get the selected restaurant from the TableView
-            Restaurant selectedRestaurant = restaurantTableView.getSelectionModel().getSelectedItem();
-            if (selectedRestaurant != null) {
-                updatedRestaurant.setRestaurantID(selectedRestaurant.getRestaurantID());
-                // Call your service's update method
-                serviceRestaurant.update(updatedRestaurant);
-                // Refresh the TableView after update
-                initialize();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
-        }
-
-        // Clear the input fields after updating
         nomTextField.clear();
         adresseTextField.clear();
         descriptionTextField.clear();

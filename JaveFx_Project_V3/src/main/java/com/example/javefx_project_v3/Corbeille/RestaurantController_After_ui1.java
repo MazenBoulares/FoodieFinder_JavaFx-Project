@@ -1,7 +1,9 @@
-package com.example.javefx_project_v3.Controllers;
+package com.example.javefx_project_v3.Corbeille;
 
 import com.example.javefx_project_v3.Entitys.Restaurant;
 import com.example.javefx_project_v3.Services.ServiceRestaurant;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +15,7 @@ import javafx.scene.layout.HBox;
 
 import java.sql.SQLException;
 
-public class RestaurantController {
+public class RestaurantController_After_ui1 {
 
     @FXML
     private TableView<Restaurant> restaurantTableView;
@@ -29,6 +31,18 @@ public class RestaurantController {
 
     @FXML
     private TextField noteMoyenneTextField;
+
+    @FXML
+    private TableColumn<Restaurant, Long> nomColumn;
+
+    @FXML
+    private TableColumn<Restaurant, String> adresseColumn;
+
+    @FXML
+    private TableColumn<Restaurant, String> descriptionColumn;
+
+    @FXML
+    private TableColumn<Restaurant, Double> noteMoyenneColumn;
 
     private final ServiceRestaurant serviceRestaurant = new ServiceRestaurant();
 
@@ -49,6 +63,12 @@ public class RestaurantController {
 
         // Set data to the TableView
         restaurantTableView.setItems(restaurantList);
+
+        // Set cell value factories for each column
+        nomColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getRestaurantID()));
+        adresseColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNomRestaurant()));
+        descriptionColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAdresseRestaurant()));
+        noteMoyenneColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
     }
 
     private class RestaurantTableRow extends javafx.scene.control.TableRow<Restaurant> {
@@ -121,37 +141,6 @@ public class RestaurantController {
         }
 
         // Clear the input fields after adding
-        nomTextField.clear();
-        adresseTextField.clear();
-        descriptionTextField.clear();
-        noteMoyenneTextField.clear();
-    }
-
-    @FXML
-    private void handleUpdateRestaurant() {
-        // Handle the update action here
-        String nom = nomTextField.getText();
-        String adresse = adresseTextField.getText();
-        String description = descriptionTextField.getText();
-        double noteMoyenne = Double.parseDouble(noteMoyenneTextField.getText());
-
-        Restaurant updatedRestaurant = new Restaurant(nom, adresse, description, noteMoyenne);
-
-        try {
-            // Get the selected restaurant from the TableView
-            Restaurant selectedRestaurant = restaurantTableView.getSelectionModel().getSelectedItem();
-            if (selectedRestaurant != null) {
-                updatedRestaurant.setRestaurantID(selectedRestaurant.getRestaurantID());
-                // Call your service's update method
-                serviceRestaurant.update(updatedRestaurant);
-                // Refresh the TableView after update
-                initialize();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle the exception appropriately
-        }
-
-        // Clear the input fields after updating
         nomTextField.clear();
         adresseTextField.clear();
         descriptionTextField.clear();
