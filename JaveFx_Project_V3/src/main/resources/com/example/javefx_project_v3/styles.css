@@ -27,3 +27,18 @@
     -fx-border-width: 0;
     -fx-border-radius: 5;
 }
+
+/* Add your existing styles here */
+
+.restaurant-cell {
+    /* Customize cell styles as needed */
+}
+
+.restaurant-name-label {
+    -fx-text-fill: black; /* Customize text color */
+    /* Add other label styles as needed */
+}
+
+.delete-button {
+    /* Add button styles as needed */
+}

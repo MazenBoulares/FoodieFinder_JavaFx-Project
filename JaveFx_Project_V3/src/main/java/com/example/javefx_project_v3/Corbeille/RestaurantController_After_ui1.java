@@ -1,4 +1,4 @@
-package com.example.javefx_project_v3.Controllers;
+package com.example.javefx_project_v3.Corbeille;
 
 import com.example.javefx_project_v3.Entitys.Restaurant;
 import com.example.javefx_project_v3.Services.ServiceRestaurant;
@@ -15,7 +15,7 @@ import javafx.scene.layout.HBox;
 
 import java.sql.SQLException;
 
-public class RestaurantController {
+public class RestaurantController_After_ui1 {
 
     @FXML
     private TableView<Restaurant> restaurantTableView;
@@ -33,10 +33,7 @@ public class RestaurantController {
     private TextField noteMoyenneTextField;
 
     @FXML
-    private TableColumn<Restaurant, Long> idColumn;
-
-    @FXML
-    private TableColumn<Restaurant, String> nomColumn;
+    private TableColumn<Restaurant, Long> nomColumn;
 
     @FXML
     private TableColumn<Restaurant, String> adresseColumn;
@@ -68,25 +65,10 @@ public class RestaurantController {
         restaurantTableView.setItems(restaurantList);
 
         // Set cell value factories for each column
-        idColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getRestaurantID()));
-        nomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNomRestaurant()));
-        adresseColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAdresseRestaurant()));
-        descriptionColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
+        nomColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getRestaurantID()));
+        adresseColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNomRestaurant()));
+        descriptionColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAdresseRestaurant()));
         noteMoyenneColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
-
-
-        
-
-
-
-
-        // Add a selection listener to handle row selection
-        restaurantTableView.getSelectionModel().
-                selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                    if (newSelection != null) {
-                        handleRestaurantSelection(newSelection);
-                    }
-                });
     }
 
     private class RestaurantTableRow extends javafx.scene.control.TableRow<Restaurant> {
@@ -99,38 +81,41 @@ public class RestaurantController {
                 setText(null);
                 setGraphic(null);
             } else {
-//                HBox cell = new HBox();
-//                cell.getStyleClass().add("restaurant-cell");
-//
-//                Button deleteButton = new Button("Delete");
-//                deleteButton.getStyleClass().add("delete-button");
-//                deleteButton.setOnAction(event -> handleDeleteRestaurant(restaurant));
-//
-//                // Customize the content to display restaurant information
-//                Button nameLabel = new Button(restaurant.getNomRestaurant());
-//                nameLabel.getStyleClass().add("restaurant-name-button");
-//                nameLabel.setOnAction(event -> handleRestaurantSelection(restaurant));
-//
-//                cell.getChildren().addAll(
-//                        nameLabel,
-//                        deleteButton
-//                );
-//
-//                setGraphic(cell);
+                HBox cell = new HBox();
+                cell.getStyleClass().add("restaurant-cell");
+
+                Button deleteButton = new Button("Delete");
+                deleteButton.getStyleClass().add("delete-button");
+                deleteButton.setOnAction(event -> handleDeleteRestaurant(restaurant));
+
+                // Customize the content to display restaurant information
+                Button nameLabel = new Button(restaurant.getNomRestaurant());
+                nameLabel.getStyleClass().add("restaurant-name-button");
+                nameLabel.setOnAction(event -> handleRestaurantSelection(restaurant));
+
+                cell.getChildren().addAll(
+                        nameLabel,
+                        deleteButton
+                );
+
+                setGraphic(cell);
             }
         }
     }
 
     private void handleDeleteRestaurant(Restaurant restaurant) {
         try {
+            // Call your service's delete method
             serviceRestaurant.delete(Math.toIntExact(restaurant.getRestaurantID()));
+            // Refresh the TableView after deletion
             initialize();
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Handle the exception appropriately
         }
     }
 
     private void handleRestaurantSelection(Restaurant restaurant) {
+        // Display selected restaurant information
         nomTextField.setText(restaurant.getNomRestaurant());
         adresseTextField.setText(restaurant.getAdresseRestaurant());
         descriptionTextField.setText(restaurant.getDescription());
@@ -139,6 +124,7 @@ public class RestaurantController {
 
     @FXML
     private void handleAddRestaurant() {
+        // Handle the add action here
         String nom = nomTextField.getText();
         String adresse = adresseTextField.getText();
         String description = descriptionTextField.getText();
@@ -148,37 +134,13 @@ public class RestaurantController {
 
         try {
             serviceRestaurant.ajouter(newRestaurant);
+            // Refresh the TableView after addition
             initialize();
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Handle the exception appropriately
         }
 
-        nomTextField.clear();
-        adresseTextField.clear();
-        descriptionTextField.clear();
-        noteMoyenneTextField.clear();
-    }
-
-    @FXML
-    private void handleUpdateRestaurant() {
-        String nom = nomTextField.getText();
-        String adresse = adresseTextField.getText();
-        String description = descriptionTextField.getText();
-        double noteMoyenne = Double.parseDouble(noteMoyenneTextField.getText());
-
-        Restaurant updatedRestaurant = new Restaurant(nom, adresse, description, noteMoyenne);
-
-        try {
-            Restaurant selectedRestaurant = restaurantTableView.getSelectionModel().getSelectedItem();
-            if (selectedRestaurant != null) {
-                updatedRestaurant.setRestaurantID(selectedRestaurant.getRestaurantID());
-                serviceRestaurant.update(updatedRestaurant);
-                initialize();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        // Clear the input fields after adding
         nomTextField.clear();
         adresseTextField.clear();
         descriptionTextField.clear();
