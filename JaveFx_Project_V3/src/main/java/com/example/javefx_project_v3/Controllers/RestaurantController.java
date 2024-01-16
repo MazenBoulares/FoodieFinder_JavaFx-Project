@@ -77,8 +77,11 @@ public class RestaurantController {
         operationsColumn.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("Delete");
 
+
             {
+                deleteButton.getStyleClass().add("delete-button");
                 deleteButton.setOnAction(event -> {
+
                     Restaurant restaurant = getTableView().getItems().get(getIndex());
                     handleDeleteRestaurant(restaurant);
                 });
