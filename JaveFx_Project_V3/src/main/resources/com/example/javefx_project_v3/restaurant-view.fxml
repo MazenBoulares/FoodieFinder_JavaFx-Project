@@ -20,7 +20,7 @@
 
         <AnchorPane layoutX="218.0" layoutY="57.0" prefHeight="690.0" prefWidth="598.0" stylesheets="@utils/manage-restaurants.css">
             <children>
-                <TableView fx:id="restaurantTableView" layoutY="338.0" prefHeight="327.0" prefWidth="598.0" stylesheets="@utils/table-style.css">
+                <TableView fx:id="restaurantTableView" layoutY="349.0" prefHeight="327.0" prefWidth="598.0" stylesheets="@utils/table-style.css">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="40.79998779296875" text="ID" />
                         <TableColumn fx:id="nomColumn" prefWidth="120.0" text="Name" />
@@ -30,7 +30,7 @@
                         <TableColumn fx:id="operationsColumn" prefWidth="92.800048828125" text="Opérations" />
                     </columns>
                 </TableView>
-              <VBox layoutX="56.0" layoutY="77.0" prefHeight="232.0" prefWidth="468.0">
+              <VBox layoutX="57.0" layoutY="83.0" prefHeight="232.0" prefWidth="468.0">
                   <children>
                       <Label text="Restaurant Name" />
                       <TextField fx:id="nomTextField" />
@@ -43,7 +43,7 @@
       
                       <Label text="Note" />
                       <TextField fx:id="noteMoyenneTextField" />
-                  <HBox prefHeight="55.0" prefWidth="468.0">
+                  <HBox prefHeight="60.0" prefWidth="431.0">
                      <children>
             
                                   <Button onAction="#handleAddRestaurant" prefHeight="40.0" prefWidth="178.0" styleClass="save_button" text="Add Restaurant" textFill="WHITE">
@@ -57,7 +57,7 @@
             
                                   <Button onAction="#handleUpdateRestaurant" prefHeight="40.0" prefWidth="178.0" styleClass="update_button" text="Update Restaurant" textFill="WHITE">
                            <HBox.margin>
-                              <Insets left="35.0" />
+                              <Insets left="10.0" right="30.0" />
                            </HBox.margin>
                            <font>
                               <Font size="14.0" />
@@ -72,10 +72,23 @@
                      </padding>
                   </HBox>
                   </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
               </VBox>
-                <Text fill="#686868" layoutX="28.0" layoutY="47.0" styleClass="main_title" text="Manage Restaurants">
+            <Text fill="#686868" layoutX="14.0" layoutY="42.0" styleClass="main_title" text="Restaurants">
                <font>
                   <Font name="Trebuchet MS" size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="14.0" layoutY="64.0" text="Manager" wrappingWidth="201.92578125">
+               <font>
+                  <Font name="Trebuchet MS" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#686868" layoutX="74.0" layoutY="65.0" text="/ Manage Restaurants">
+               <font>
+                  <Font name="Trebuchet MS" size="15.0" />
                </font>
             </Text>
             </children>
@@ -83,7 +96,7 @@
 
 
 <!--          sidebar               -->
-      <VBox layoutY="57.0" prefHeight="706.0" prefWidth="188.0" styleClass="side-bar">
+      <VBox layoutY="57.0" prefHeight="706.0" prefWidth="202.0" styleClass="side-bar">
          <children>
             <Button mnemonicParsing="false" onAction="#handleManageRestaurantsButtonAction" prefHeight="39.0" prefWidth="211.0" styleClass="side-bar-button" text="★  Manage Restaurants">
                <font>

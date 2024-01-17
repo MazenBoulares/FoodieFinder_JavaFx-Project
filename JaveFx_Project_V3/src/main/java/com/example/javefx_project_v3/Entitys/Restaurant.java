@@ -43,6 +43,17 @@ public class Restaurant {
     }
 
 
+
+    public Restaurant(Long restaurantID, String nomRestaurant, String adresseRestaurant, String description, Double noteMoyenne, int isApproved) {
+        this.restaurantID=restaurantID;
+        this.nomRestaurant = nomRestaurant;
+        this.adresseRestaurant = adresseRestaurant;
+        this.description = description;
+        this.noteMoyenne = noteMoyenne;
+        this.isApproved= isApproved;
+    }
+
+
     public Long getRestaurantID() {
         //return restaurantID;
         return restaurantID != null ? restaurantID : 0L;
@@ -84,7 +95,7 @@ public class Restaurant {
         this.noteMoyenne = noteMoyenne;
     }
 
-    public int getIsApproveds() {
+    public int getIsApproved() {
         return isApproved;
     }
 

@@ -128,17 +128,41 @@
 
 /* Yellow Button for In Progress */
 .in-progress-button {
+
+    -fx-font-weight: bold;
     -fx-background-color: #ffd700; /* Yellow */
 }
 
 /* Green Button for Accept */
 .accept-button {
+    -fx-text-fill:white;
+    -fx-font-weight: bold;
     -fx-background-color: #00ff00; /* Green */
 }
 
 /* Red Button for Refuse */
 .refuse-button {
+    -fx-text-fill:white;
+    -fx-font-weight: bold;
     -fx-background-color: #ff0000; /* Red */
 }
 
 /* Add other styles as needed */
+
+
+/* Add these styles to your existing stylesheet */
+
+/* In Progress Button Style */
+.in-progress-button {
+    -fx-background-color: yellow;
+}
+
+/* Accepted Button Style */
+.accept-button {
+    -fx-background-color: green;
+}
+
+/* Refused Button Style */
+.refuse-button {
+    -fx-background-color: red;
+}

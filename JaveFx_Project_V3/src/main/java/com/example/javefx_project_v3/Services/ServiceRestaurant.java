@@ -83,8 +83,9 @@ public class ServiceRestaurant implements IServiceResto<Restaurant> {
                 String adresse = resultSet.getString("AdresseRestaurant");
                 String description = resultSet.getString("Description");
                 double noteMoyenne = resultSet.getDouble("NoteMoyenne");
+                int isApproved = resultSet.getInt("IsApproved");
 
-                Restaurant restaurant = new Restaurant(id,nom, adresse, description, noteMoyenne);
+                Restaurant restaurant = new Restaurant(id,nom, adresse, description, noteMoyenne, isApproved);
                 list.add(restaurant);
             }
         } catch (SQLException e) {

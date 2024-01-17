@@ -72,32 +72,30 @@ public class EvaluateRestaurantController {
         descriptionColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
         noteMoyenneColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
 
+        // Inside your EvaluateRestaurantController class
+
+// ...
+
         operationsColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button deleteButton = new Button("❌");
             private final Button inProgressButton = new Button("In Progress");
-            private final Button acceptButton = new Button("Accept");
-            private final Button refuseButton = new Button("Refuse");
+            private final Button acceptButton = new Button("Accepted");
+            private final Button refuseButton = new Button("Refused");
 
             {
-                deleteButton.getStyleClass().add("delete-button");
-                deleteButton.setOnAction(event -> {
-                    Restaurant restaurant = getTableView().getItems().get(getIndex());
-                    handleDeleteRestaurant(restaurant);
-                });
-
                 inProgressButton.getStyleClass().add("in-progress-button");
+                acceptButton.getStyleClass().add("accept-button");
+                refuseButton.getStyleClass().add("refuse-button");
+
                 inProgressButton.setOnAction(event -> {
                     Restaurant restaurant = getTableView().getItems().get(getIndex());
                     showApprovalPopup(restaurant);
                 });
 
-                acceptButton.getStyleClass().add("accept-button");
                 acceptButton.setOnAction(event -> {
                     Restaurant restaurant = getTableView().getItems().get(getIndex());
                     handleAcceptRestaurant(restaurant);
                 });
 
-                refuseButton.getStyleClass().add("refuse-button");
                 refuseButton.setOnAction(event -> {
                     Restaurant restaurant = getTableView().getItems().get(getIndex());
                     handleRefuseRestaurant(restaurant);
@@ -110,17 +108,29 @@ public class EvaluateRestaurantController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    int approvalStatus = getTableView().getItems().get(getIndex()).getIsApproveds();
-                    if (approvalStatus == 0) {
-                        setGraphic(inProgressButton);
-                    } else if (approvalStatus == 1) {
-                        setGraphic(acceptButton);
-                    } else {
-                        setGraphic(refuseButton);
+                    int approvalStatus = getTableView().getItems().get(getIndex()).isApproved;
+                    System.out.println(getTableView().getItems().get(getIndex()).isApproved);
+
+                    switch (approvalStatus) {
+                        case 0:
+                            setGraphic(inProgressButton);
+                            break;
+                        case 1:
+                            setGraphic(acceptButton);
+                            break;
+                        case 2:
+                            setGraphic(refuseButton);
+                            break;
+                        default:
+                            setGraphic(null);
                     }
                 }
             }
+
+
         });
+
+
 
         restaurantTableView.getSelectionModel()
                 .selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
