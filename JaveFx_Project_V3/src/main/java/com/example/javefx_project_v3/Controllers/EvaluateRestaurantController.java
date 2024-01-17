@@ -8,18 +8,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class RestaurantController {
+public class EvaluateRestaurantController {
 
     @FXML
     private TableView<Restaurant> restaurantTableView;
@@ -77,7 +71,7 @@ public class RestaurantController {
         noteMoyenneColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
 
         operationsColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button deleteButton = new Button("❌");
+            private final Button deleteButton = new Button("Delete");
 
 
             {
@@ -187,8 +181,6 @@ public class RestaurantController {
         noteMoyenneTextField.clear();
     }
 
-
-
     //********************************navbar******************************************
 
     @FXML
@@ -214,6 +206,9 @@ public class RestaurantController {
 
 
     //********************************navbar******************************************
+
+
+
 
 
 }

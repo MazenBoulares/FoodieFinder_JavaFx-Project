@@ -9,21 +9,61 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainApplication extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("restaurant-view.fxml"));
-        Parent root = fxmlLoader.load();
 
-        // Apply the CSS style
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("ManageClubs.css").toExternalForm());
+    private static Stage primaryStage;
 
-        stage.setTitle("Restaurant List");
-        stage.setScene(scene);
-        stage.show();
+    public static void setPrimaryStage(Stage stage) {
+        primaryStage = stage;
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        primaryStage = stage;
+        showLoginPage(); // Load the initial page
+    }
+
+    public static void showLoginPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login.fxml"));
+        Parent root = fxmlLoader.load();
+
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Login");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void showRestaurantPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("restaurant-view.fxml"));
+        Parent root = fxmlLoader.load();
+
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Manage Restaurants");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+
+    public static void showEvaluateRestaurantPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("evaluate-restaurant-view.fxml"));
+        Parent root = fxmlLoader.load();
+
+        Scene scene = new Scene(root);
+        primaryStage.setTitle("Evaluate Restaurants");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+//
+
+
+    // Add similar methods for other pages
+
+    // ...
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 }
