@@ -117,4 +117,23 @@ public class ServiceRestaurant implements IServiceResto<Restaurant> {
 
         return null;
     }
+    public void acceptRestaurant(Restaurant restaurant) throws SQLException {
+        String sql = "UPDATE Restaurants SET IsApproved=? WHERE RestaurantID=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+            preparedStatement.setInt(1, 1); // 1 represents accepted status
+            preparedStatement.setLong(2, restaurant.getRestaurantID());
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    public void refuseRestaurant(Restaurant restaurant) throws SQLException {
+        String sql = "UPDATE Restaurants SET IsApproved=? WHERE RestaurantID=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+            preparedStatement.setInt(1, 2); // 2 represents refused status
+            preparedStatement.setLong(2, restaurant.getRestaurantID());
+            preparedStatement.executeUpdate();
+        }
+    }
+
+
 }

@@ -23,7 +23,8 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         primaryStage = stage;
-        showLoginPage(); // Load the initial page
+       showLoginPage(); // Load the initial page
+
     }
 
     public static void showLoginPage() throws IOException {
@@ -56,6 +57,11 @@ public class MainApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+
+
+
+
 //
 
 

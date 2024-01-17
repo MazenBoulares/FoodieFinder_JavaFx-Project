@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="758.0" prefWidth="842.0" stylesheets="@utils/manage-restaurants.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javefx_project_v3.Controllers.RestaurantController">
+<AnchorPane prefHeight="758.0" prefWidth="842.0" stylesheets="@utils/manage-restaurants.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javefx_project_v3.Controllers.EvaluateRestaurantController">
     <children>
 
         <AnchorPane layoutX="218.0" layoutY="57.0" prefHeight="690.0" prefWidth="598.0" stylesheets="@utils/manage-restaurants.css">
@@ -73,9 +73,9 @@
                         </HBox>
                     </children>
                 </VBox>
-                <Text fill="#7b7a7a" layoutX="28.0" layoutY="47.0" styleClass="main_title" text="Evaluer Restaurants">
+                <Text fill="#686868" layoutX="28.0" layoutY="47.0" styleClass="main_title" text="Evaluer Restaurants">
                     <font>
-                        <Font name="Trebuchet MS" size="24.0" />
+                        <Font name="Trebuchet MS" size="30.0" />
                     </font>
                 </Text>
             </children>

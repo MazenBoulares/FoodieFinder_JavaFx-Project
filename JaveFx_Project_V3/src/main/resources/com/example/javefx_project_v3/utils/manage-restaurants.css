@@ -122,3 +122,17 @@
 
 
 
+
+
+
+.approval-button {
+    -fx-background-color: yellow;
+}
+
+.approved-button {
+    -fx-background-color: green;
+}
+
+.refused-button {
+    -fx-background-color: red;
+}

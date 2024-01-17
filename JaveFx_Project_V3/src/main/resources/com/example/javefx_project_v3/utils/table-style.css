@@ -22,5 +22,10 @@
     -fx-text-fill: white; /* Header text color */
 }
 
+.delete-button {
+    -fx-background-color: #ff6666;
+}
+
+
 
 /* //              table View                  */
