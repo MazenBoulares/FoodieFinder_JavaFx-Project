@@ -30,10 +30,38 @@
     -fx-text-fill: #FFFFFF;
 }
 .save_button {
-    -fx-background-color: linear-gradient(to left, #34c724, #46c35b);
+    -fx-background-color: #09c246;
+    -fx-border: none;
+    -fx-color: white;
+    -fx-padding: 10px 25px;
+    -fx-text-decoration: none;
+    -fx-margin: 10px 20px;
+    -fx-cursor: pointer;
+    -fx-border-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
 }
 .update_button {
-    -fx-background-color: linear-gradient(to left, #e0c048, #cbb22f);
+    -fx-background-color: linear-gradient(to left, #4b74f3, #4b99f3);
+    -fx-border: none;
+    -fx-color: white;
+    -fx-padding: 10px 25px;
+    -fx-text-decoration: none;
+    -fx-margin: 10px 2px;
+    -fx-cursor: pointer;
+    -fx-border-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+
+}
+
+.delete-button {
+    -fx-background-color: #fd6868;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 7px;
+    -fx-alignment: CENTER;
+    -fx-start-margin: 5px;
+    /* Add any additional styles you want to customize */
 }
 .new_local_container Button:hover {
     -fx-cursor: hand;
@@ -59,3 +87,38 @@
 .delete-button {
     /* Add button styles as needed */
 }
+
+.main_title{
+
+    -fx-background-color:white;
+    -fx-font-size: 30px;
+    -fx-font-weight: 600;
+
+    -fx-color: transparent;
+    -fx-background-clip: text;
+    -fx-webkit-background-clip: text;
+}
+
+
+.nav-bar{
+    -fx-background-color: linear-gradient(to left, #111152, #dc3858);
+
+}
+
+.side-bar{
+    -fx-background-color: #393750;
+
+}
+
+
+.side-bar-button{
+    -fx-background-color: transparent;
+    -fx-text-fill:white;
+    -fx-alignment: CENTER-left;
+    -fx-letter-spacing: 20px;
+    -fx-font-weight: bold;
+}
+
+
+
+
