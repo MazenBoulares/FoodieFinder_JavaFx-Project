@@ -1,5 +1,5 @@
 package com.example.javefx_project_v3.Entitys;
-public class User {
+public class UserMazen {
     private Integer userID;
     private String nom;
     private String prenom;
@@ -9,10 +9,10 @@ public class User {
 
     // Constructors, getters, and setters
 
-    public User() {
+    public UserMazen() {
     }
 
-    public User(String nom, String prenom, String email, String motDePasse, String typeUtilisateur) {
+    public UserMazen(String nom, String prenom, String email, String motDePasse, String typeUtilisateur) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;

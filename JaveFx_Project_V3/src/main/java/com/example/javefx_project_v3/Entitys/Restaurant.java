@@ -10,7 +10,7 @@ public class Restaurant {
     public Double noteMoyenne;
 
 
-    private User manager;
+    private UserMazen manager;
 
     
 
