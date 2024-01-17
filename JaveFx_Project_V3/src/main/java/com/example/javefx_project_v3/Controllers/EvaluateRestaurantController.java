@@ -75,6 +75,8 @@ public class EvaluateRestaurantController {
         operationsColumn.setCellFactory(param -> new TableCell<>() {
             private final Button deleteButton = new Button("❌");
             private final Button inProgressButton = new Button("In Progress");
+            private final Button acceptButton = new Button("Accept");
+            private final Button refuseButton = new Button("Refuse");
 
             {
                 deleteButton.getStyleClass().add("delete-button");
@@ -88,6 +90,18 @@ public class EvaluateRestaurantController {
                     Restaurant restaurant = getTableView().getItems().get(getIndex());
                     showApprovalPopup(restaurant);
                 });
+
+                acceptButton.getStyleClass().add("accept-button");
+                acceptButton.setOnAction(event -> {
+                    Restaurant restaurant = getTableView().getItems().get(getIndex());
+                    handleAcceptRestaurant(restaurant);
+                });
+
+                refuseButton.getStyleClass().add("refuse-button");
+                refuseButton.setOnAction(event -> {
+                    Restaurant restaurant = getTableView().getItems().get(getIndex());
+                    handleRefuseRestaurant(restaurant);
+                });
             }
 
             @Override
@@ -99,8 +113,10 @@ public class EvaluateRestaurantController {
                     int approvalStatus = getTableView().getItems().get(getIndex()).getIsApproveds();
                     if (approvalStatus == 0) {
                         setGraphic(inProgressButton);
+                    } else if (approvalStatus == 1) {
+                        setGraphic(acceptButton);
                     } else {
-                        setGraphic(deleteButton);
+                        setGraphic(refuseButton);
                     }
                 }
             }
@@ -233,6 +249,10 @@ public class EvaluateRestaurantController {
         noteMoyenneTextField.clear();
     }
 
+    // ... Other methods
+
+    //********************************navbar******************************************
+
     @FXML
     private void handleEvaluateRestaurantsButtonAction() throws IOException {
         MainApplication.showEvaluateRestaurantPage();
@@ -242,4 +262,6 @@ public class EvaluateRestaurantController {
     private void handleManageRestaurantsButtonAction() throws IOException {
         MainApplication.showRestaurantPage();
     }
+
+    //********************************navbar******************************************
 }

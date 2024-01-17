@@ -125,14 +125,20 @@
 
 
 
-.approval-button {
-    -fx-background-color: yellow;
+
+/* Yellow Button for In Progress */
+.in-progress-button {
+    -fx-background-color: #ffd700; /* Yellow */
 }
 
-.approved-button {
-    -fx-background-color: green;
+/* Green Button for Accept */
+.accept-button {
+    -fx-background-color: #00ff00; /* Green */
 }
 
-.refused-button {
-    -fx-background-color: red;
+/* Red Button for Refuse */
+.refuse-button {
+    -fx-background-color: #ff0000; /* Red */
 }
+
+/* Add other styles as needed */
