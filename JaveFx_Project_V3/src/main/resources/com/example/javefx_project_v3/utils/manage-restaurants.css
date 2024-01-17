@@ -122,3 +122,23 @@
 
 
 
+
+
+
+
+/* Yellow Button for In Progress */
+.in-progress-button {
+    -fx-background-color: #ffd700; /* Yellow */
+}
+
+/* Green Button for Accept */
+.accept-button {
+    -fx-background-color: #00ff00; /* Green */
+}
+
+/* Red Button for Refuse */
+.refuse-button {
+    -fx-background-color: #ff0000; /* Red */
+}
+
+/* Add other styles as needed */

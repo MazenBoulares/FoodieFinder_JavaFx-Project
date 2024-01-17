@@ -9,6 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -71,15 +73,34 @@ public class EvaluateRestaurantController {
         noteMoyenneColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
 
         operationsColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button deleteButton = new Button("Delete");
-
+            private final Button deleteButton = new Button("❌");
+            private final Button inProgressButton = new Button("In Progress");
+            private final Button acceptButton = new Button("Accept");
+            private final Button refuseButton = new Button("Refuse");
 
             {
                 deleteButton.getStyleClass().add("delete-button");
                 deleteButton.setOnAction(event -> {
-
                     Restaurant restaurant = getTableView().getItems().get(getIndex());
                     handleDeleteRestaurant(restaurant);
+                });
+
+                inProgressButton.getStyleClass().add("in-progress-button");
+                inProgressButton.setOnAction(event -> {
+                    Restaurant restaurant = getTableView().getItems().get(getIndex());
+                    showApprovalPopup(restaurant);
+                });
+
+                acceptButton.getStyleClass().add("accept-button");
+                acceptButton.setOnAction(event -> {
+                    Restaurant restaurant = getTableView().getItems().get(getIndex());
+                    handleAcceptRestaurant(restaurant);
+                });
+
+                refuseButton.getStyleClass().add("refuse-button");
+                refuseButton.setOnAction(event -> {
+                    Restaurant restaurant = getTableView().getItems().get(getIndex());
+                    handleRefuseRestaurant(restaurant);
                 });
             }
 
@@ -89,17 +110,64 @@ public class EvaluateRestaurantController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(deleteButton);
+                    int approvalStatus = getTableView().getItems().get(getIndex()).getIsApproveds();
+                    if (approvalStatus == 0) {
+                        setGraphic(inProgressButton);
+                    } else if (approvalStatus == 1) {
+                        setGraphic(acceptButton);
+                    } else {
+                        setGraphic(refuseButton);
+                    }
                 }
             }
         });
 
-        restaurantTableView.getSelectionModel().
-                selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        restaurantTableView.getSelectionModel()
+                .selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                     if (newSelection != null) {
                         handleRestaurantSelection(newSelection);
                     }
                 });
+    }
+
+    private void showApprovalPopup(Restaurant restaurant) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Approval Confirmation");
+        alert.setHeaderText("Do you want to accept or refuse the restaurant?");
+        alert.setContentText("Choose your option:");
+
+        ButtonType acceptButton = new ButtonType("Accept");
+        ButtonType refuseButton = new ButtonType("Refuse");
+
+        alert.getButtonTypes().setAll(acceptButton, refuseButton);
+
+        alert.initModality(Modality.APPLICATION_MODAL);
+
+        alert.showAndWait().ifPresent(result -> {
+            if (result == acceptButton) {
+                handleAcceptRestaurant(restaurant);
+            } else if (result == refuseButton) {
+                handleRefuseRestaurant(restaurant);
+            }
+        });
+    }
+
+    private void handleAcceptRestaurant(Restaurant restaurant) {
+        try {
+            serviceRestaurant.acceptRestaurant(restaurant);
+            initialize();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void handleRefuseRestaurant(Restaurant restaurant) {
+        try {
+            serviceRestaurant.refuseRestaurant(restaurant);
+            initialize();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private class RestaurantTableRow extends javafx.scene.control.TableRow<Restaurant> {
@@ -181,34 +249,19 @@ public class EvaluateRestaurantController {
         noteMoyenneTextField.clear();
     }
 
+    // ... Other methods
+
     //********************************navbar******************************************
 
     @FXML
     private void handleEvaluateRestaurantsButtonAction() throws IOException {
-        // Perform login logic
-
-        // If login is successful, navigate to the home page
         MainApplication.showEvaluateRestaurantPage();
     }
 
-
-
-
     @FXML
     private void handleManageRestaurantsButtonAction() throws IOException {
-        // Perform login logic
-
-        // If login is successful, navigate to the home page
         MainApplication.showRestaurantPage();
     }
 
-
-
-
     //********************************navbar******************************************
-
-
-
-
-
 }

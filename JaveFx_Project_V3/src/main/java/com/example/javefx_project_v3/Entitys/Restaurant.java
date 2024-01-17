@@ -6,7 +6,7 @@ public class Restaurant {
     public String adresseRestaurant;
     public String description;
 
-    public boolean isApproved;
+    public int isApproved;
     public Double noteMoyenne;
 
 
@@ -28,7 +28,7 @@ public class Restaurant {
         this.adresseRestaurant = adresseRestaurant;
         this.description = description;
         this.noteMoyenne = noteMoyenne;
-        this.isApproved=false;
+        this.isApproved=0;
        // this.manager=user;
     }
 
@@ -39,7 +39,7 @@ public class Restaurant {
         this.adresseRestaurant = adresseRestaurant;
         this.description = description;
         this.noteMoyenne = noteMoyenne;
-      this.isApproved=false;
+      this.isApproved=0;
     }
 
 
@@ -84,13 +84,14 @@ public class Restaurant {
         this.noteMoyenne = noteMoyenne;
     }
 
-    public boolean isApproved() {
+    public int getIsApproveds() {
         return isApproved;
     }
 
-    public void setApproved(boolean approved) {
-        isApproved = approved;
+    public void setIsApproved(int x) {
+        isApproved = x;
     }
+
 
 
     @Override
