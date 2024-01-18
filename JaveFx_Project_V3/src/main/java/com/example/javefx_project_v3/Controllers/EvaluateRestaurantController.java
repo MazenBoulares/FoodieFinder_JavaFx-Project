@@ -1,5 +1,6 @@
 package com.example.javefx_project_v3.Controllers;
 
+import com.example.javefx_project_v3.Entitys.CurrentLoggedIn;
 import com.example.javefx_project_v3.Entitys.Restaurant;
 import com.example.javefx_project_v3.MainApplication;
 import com.example.javefx_project_v3.Services.ServiceRestaurant;
@@ -10,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 
 import java.io.IOException;
@@ -47,14 +49,40 @@ public class EvaluateRestaurantController {
     @FXML
     private TableColumn<Restaurant, Double> noteMoyenneColumn;
 
+
+    @FXML
+    private TableColumn<Restaurant, String> managerColumn;
+
     @FXML
     private TableColumn<Restaurant, Void> operationsColumn;
+
+
+
 
     private final ServiceRestaurant serviceRestaurant = new ServiceRestaurant();
 
     @FXML
+    private Text authName;
+
+    @FXML
+    private Text authuserType;
+
+
+    private final CurrentLoggedIn currentLoggedIn = CurrentLoggedIn.getInstance();
+
+    @FXML
     public void initialize() {
+
+        authName.setText( currentLoggedIn.getLoggedIn().getPrenom()+" "+currentLoggedIn.getLoggedIn().getNom());
+
+        authuserType.setText(String.valueOf(currentLoggedIn.getLoggedIn().getTypeUtilisateur()));
+
+
+
         ObservableList<Restaurant> restaurantList = FXCollections.observableArrayList();
+
+
+
 
         try {
             restaurantList.addAll(serviceRestaurant.readAll());
@@ -70,8 +98,14 @@ public class EvaluateRestaurantController {
         nomColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNomRestaurant()));
         adresseColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getAdresseRestaurant()));
         descriptionColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDescription()));
-        noteMoyenneColumn.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
+        noteMoyenneColumn.setCellValueFactory(data ->
+                new SimpleObjectProperty<>(data.getValue().getNoteMoyenne()));
 
+
+
+        managerColumn.setCellValueFactory(data -> {
+            return new SimpleObjectProperty<>(data.getValue().getManager().getPrenom()+" "+data.getValue().getManager().getNom() );
+        });
         // Inside your EvaluateRestaurantController class
 
 // ...
@@ -141,7 +175,7 @@ public class EvaluateRestaurantController {
     }
 
     private void showApprovalPopup(Restaurant restaurant) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Approval Confirmation");
         alert.setHeaderText("Do you want to accept or refuse the restaurant?");
         alert.setContentText("Choose your option:");
@@ -259,7 +293,7 @@ public class EvaluateRestaurantController {
         noteMoyenneTextField.clear();
     }
 
-    // ... Other methods
+
 
     //********************************navbar******************************************
 
@@ -272,6 +306,17 @@ public class EvaluateRestaurantController {
     private void handleManageRestaurantsButtonAction() throws IOException {
         MainApplication.showRestaurantPage();
     }
+
+    @FXML
+    private void handleLogout() throws IOException {
+        // Perform login logic
+
+        // If login is successful, navigate to the home page
+        currentLoggedIn.setLoggedIn(null);
+        MainApplication.showLoginPage();
+    }
+
+
 
     //********************************navbar******************************************
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.PointLight?>
 <?import javafx.scene.control.Button?>
@@ -11,6 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -23,19 +25,20 @@
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="40.79998779296875" text="ID" />
                         <TableColumn fx:id="nomColumn" prefWidth="120.0" text="Name" />
-                        <TableColumn fx:id="adresseColumn" prefWidth="136.79995727539062" text="Address" />
-                        <TableColumn fx:id="descriptionColumn" maxWidth="500.0" prefWidth="152.0" text="Description" />
-                        <TableColumn fx:id="noteMoyenneColumn" prefWidth="55.199951171875" text="Note" />
-                        <TableColumn fx:id="operationsColumn" prefWidth="92.800048828125" text="Opérations" />
+                        <TableColumn fx:id="adresseColumn" prefWidth="101.0" text="Address" />
+                        <TableColumn fx:id="descriptionColumn" maxWidth="500.0" prefWidth="171.0" text="Description" />
+                        <TableColumn fx:id="noteMoyenneColumn" prefWidth="58.0" text="Note" />
+                        <TableColumn fx:id="managerColumn" prefWidth="106.0" text="Managed By" />
+                        <TableColumn fx:id="operationsColumn" prefWidth="106.0" text="Opérations" />
                     </columns>
                 </TableView>
-                <VBox layoutX="59.0" layoutY="91.0" prefHeight="94.0" prefWidth="468.0">
+                <VBox layoutX="59.0" layoutY="75.0" prefHeight="94.0" prefWidth="468.0">
                     <children>
                         <HBox prefHeight="55.0" prefWidth="468.0">
                             <children>
                               <TextField fx:id="noteMoyenneTextField" prefHeight="37.0" prefWidth="302.0" />
 
-                                <Button onAction="#handleAddRestaurant" prefHeight="21.0" prefWidth="117.0" styleClass="save_button" text="Search" textFill="WHITE">
+                                <Button onAction="#handleAddRestaurant" prefHeight="28.0" prefWidth="94.0" styleClass="save_button" text="Search" textFill="WHITE">
                                     <font>
                                         <Font size="14.0" />
                                     </font>
@@ -75,14 +78,14 @@
         <!--          sidebar               -->
         <VBox layoutY="57.0" prefHeight="706.0" prefWidth="202.0" styleClass="side-bar">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleManageRestaurantsButtonAction" prefHeight="39.0" prefWidth="211.0" styleClass="side-bar-button" text="★  Manage Restaurants">
+                <Button mnemonicParsing="false" onAction="#handleManageRestaurantsButtonAction" prefHeight="39.0" prefWidth="211.0" styleClass="side-bar-button" text=" ►  Manage Restaurants">
                     <font>
                         <Font name="Agency FB Bold" size="15.0" />
                     </font>
                     <VBox.margin>
                         <Insets bottom="5.0" />
                     </VBox.margin></Button>
-                <Button mnemonicParsing="false" onAction="#handleEvaluateRestaurantsButtonAction" prefHeight="39.0" prefWidth="211.0" styleClass="side-bar-button" text="★  Evaluate Restaurants">
+                <Button mnemonicParsing="false" onAction="#handleEvaluateRestaurantsButtonAction" prefHeight="39.0" prefWidth="211.0" styleClass="side-bar-button" text="►  Evaluate Restaurants">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
@@ -90,7 +93,7 @@
                         <Insets bottom="5.0" />
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="211.0" styleClass="side-bar-button" text="★  Manage Reservations">
+                <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="211.0" styleClass="side-bar-button" text="❓  Help">
                     <font>
                         <Font size="15.0" />
                     </font>
@@ -98,13 +101,33 @@
                         <Insets bottom="5.0" />
                     </VBox.margin>
                 </Button>
+
+
+
+
+
                 <PointLight color="CHARTREUSE" lightOn="true" />
+            <Button mnemonicParsing="false" onAction="#handleLogout" prefHeight="39.0" prefWidth="76.0" text="Logout">
+               <styleClass>
+                  <String fx:value="side-bar-button" />
+                  <String fx:value="logout-button" />
+               </styleClass>
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="60.0" top="490.0" />
+               </VBox.margin>
+            </Button>
             </children>
 
             <padding>
                 <Insets top="20.0" />
             </padding>
         </VBox>
+
+
+
 
         <!--          /sidebar               -->
 
@@ -120,6 +143,46 @@
                         <Insets left="17.0" top="7.0" />
                     </HBox.margin>
                 </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@utils/icons8-test-account-30.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="460.0" top="6.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text fx:id="authName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="6.0" />
+                     </VBox.margin>
+                  </Text>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text fx:id="authuserType" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Text>
+                        <Circle fill="#3ec94e" radius="4.0" stroke="BLACK" strokeType="INSIDE">
+                           <HBox.margin>
+                              <Insets left="2.0" />
+                           </HBox.margin>
+                        </Circle>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
             </children>
             <padding>
                 <Insets bottom="10.0" top="5.0" />

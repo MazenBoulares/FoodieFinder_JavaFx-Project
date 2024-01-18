@@ -1,26 +1,6 @@
-/* //              table View                  */
 
 
-.table-view {
-    -fx-control-inner-background: #f4f4f4; /* Background color of the table */
-}
 
-.table-row-cell {
-    -fx-background-color: #ffffff; /* Background color of the cells */
-}
-
-.table-row-cell:hover {
-    -fx-background-color: #e0e0e0; /* Hover color */
-}
-
-.table-column {
-    -fx-alignment: CENTER; /* Center-align text in cells */
-}
-
-.table-header {
-    -fx-background-color: #4f81bd; /* Header background color */
-    -fx-text-fill: white; /* Header text color */
-}
 
 .delete-button {
     -fx-background-color: #ff6666;
@@ -29,3 +9,72 @@
 
 
 /* //              table View                  */
+
+
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom, rgb(172, 142, 201), rgba(227, 118, 142, 0.78));
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+    -fx-text-fill: white;
+
+}
+
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+
+
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right, rgba(136, 161, 234, 0.93), rgba(227, 118, 142, 0.78));
+}
+
+.table-cell {
+    -fx-padding: 10 10 10 10; /* Set margin (padding) between cells */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

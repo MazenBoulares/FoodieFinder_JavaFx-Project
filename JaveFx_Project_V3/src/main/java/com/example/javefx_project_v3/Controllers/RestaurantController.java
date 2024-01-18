@@ -17,7 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
+import javafx.scene.control.Alert;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -73,11 +73,11 @@ public class RestaurantController {
 
     @FXML
     public void initialize() {
-        System.out.println("inisde");
-
-
-        System.out.println(currentLoggedIn.getLoggedIn().getEmail());
-        System.out.println(currentLoggedIn.getLoggedIn().getTypeUtilisateur());
+//        System.out.println("inisde");
+//
+//
+//        System.out.println(currentLoggedIn.getLoggedIn().getEmail());
+//        System.out.println(currentLoggedIn.getLoggedIn().getTypeUtilisateur());
 
         authName.setText( currentLoggedIn.getLoggedIn().getPrenom()+" "+currentLoggedIn.getLoggedIn().getNom());
 
@@ -87,11 +87,20 @@ public class RestaurantController {
 
         ObservableList<Restaurant> restaurantList = FXCollections.observableArrayList();
 
+//        try {
+//            restaurantList.addAll(serviceRestaurant.readAll());
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Handle the exception appropriately
+//        }
+
         try {
-            restaurantList.addAll(serviceRestaurant.readAll());
+            // Assuming that you have a method to get the managerID from the logged-in user
+            int managerID = currentLoggedIn.getLoggedIn().getUserID();
+            restaurantList.addAll(serviceRestaurant.getRestaurantsByManagerID(managerID));
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately
         }
+
 
         restaurantTableView.setRowFactory(param -> new RestaurantTableRow());
 
@@ -168,51 +177,95 @@ public class RestaurantController {
 
     @FXML
     private void handleAddRestaurant() {
-        String nom = nomTextField.getText();
-        String adresse = adresseTextField.getText();
-        String description = descriptionTextField.getText();
-        double noteMoyenne = Double.parseDouble(noteMoyenneTextField.getText());
+        if (validateInput()) {
+            String nom = nomTextField.getText();
+            String adresse = adresseTextField.getText();
+            String description = descriptionTextField.getText();
+            double noteMoyenne = Double.parseDouble(noteMoyenneTextField.getText());
 
-        Restaurant newRestaurant = new Restaurant(nom, adresse, description, noteMoyenne);
+            Restaurant newRestaurant = new Restaurant(nom, adresse, description, noteMoyenne);
 
-        try {
-            serviceRestaurant.ajouter(newRestaurant);
-            initialize();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            try {
+                serviceRestaurant.ajouter(newRestaurant);
+                initialize();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            nomTextField.clear();
+            adresseTextField.clear();
+            descriptionTextField.clear();
+            noteMoyenneTextField.clear();
         }
-
-        nomTextField.clear();
-        adresseTextField.clear();
-        descriptionTextField.clear();
-        noteMoyenneTextField.clear();
     }
 
     @FXML
     private void handleUpdateRestaurant() {
-        String nom = nomTextField.getText();
-        String adresse = adresseTextField.getText();
-        String description = descriptionTextField.getText();
-        double noteMoyenne = Double.parseDouble(noteMoyenneTextField.getText());
+        if (validateInput()) {
+            String nom = nomTextField.getText();
+            String adresse = adresseTextField.getText();
+            String description = descriptionTextField.getText();
+            double noteMoyenne = Double.parseDouble(noteMoyenneTextField.getText());
 
-        Restaurant updatedRestaurant = new Restaurant(nom, adresse, description, noteMoyenne);
+            Restaurant updatedRestaurant = new Restaurant(nom, adresse, description, noteMoyenne);
 
-        try {
-            Restaurant selectedRestaurant = restaurantTableView.getSelectionModel().getSelectedItem();
-            if (selectedRestaurant != null) {
-                updatedRestaurant.setRestaurantID(selectedRestaurant.getRestaurantID());
-                serviceRestaurant.update(updatedRestaurant);
-                initialize();
+            try {
+                Restaurant selectedRestaurant = restaurantTableView.getSelectionModel().getSelectedItem();
+                if (selectedRestaurant != null) {
+                    updatedRestaurant.setRestaurantID(selectedRestaurant.getRestaurantID());
+                    serviceRestaurant.update(updatedRestaurant);
+                    initialize();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+            nomTextField.clear();
+            adresseTextField.clear();
+            descriptionTextField.clear();
+            noteMoyenneTextField.clear();
+        }
+    }
+
+    private boolean validateInput() {
+        if (nomTextField.getText().isEmpty() || adresseTextField.getText().isEmpty() ||
+                descriptionTextField.getText().isEmpty() || noteMoyenneTextField.getText().isEmpty()) {
+            showAlert("Error", "All fields must be filled!");
+            return false;
         }
 
-        nomTextField.clear();
-        adresseTextField.clear();
-        descriptionTextField.clear();
-        noteMoyenneTextField.clear();
+        // Check if nom contains only characters
+        if (!nomTextField.getText().matches("[a-zA-Z]+")) {
+            showAlert("Error", "Nom must contain only characters!");
+            return false;
+        }
+
+        try {
+            double noteMoyenne = Double.parseDouble(noteMoyenneTextField.getText());
+
+            // Check if noteMoyenne is between 0 and 10
+            if (noteMoyenne < 0 || noteMoyenne > 10) {
+                showAlert("Error", "Note must be between 0 and 10!");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Note must be a valid number!");
+            return false;
+        }
+
+        // Additional validation checks can be added here
+
+        return true;
     }
+
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
 
 
 
@@ -236,6 +289,18 @@ public class RestaurantController {
         // If login is successful, navigate to the home page
         MainApplication.showRestaurantPage();
     }
+
+
+    @FXML
+    private void handleLogout() throws IOException {
+        // Perform login logic
+
+        // If login is successful, navigate to the home page
+        currentLoggedIn.setLoggedIn(null);
+        MainApplication.showLoginPage();
+    }
+
+
 
 
 

@@ -146,6 +146,42 @@ if(manager!=null){
         return list;
     }
 
+
+    public  ArrayList<Restaurant> getRestaurantsByManagerID(int managerID) throws SQLException {
+        ArrayList<Restaurant> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Restaurants WHERE ManagerID=?";
+            try (PreparedStatement preparedStatement = con.prepareStatement(sql)) {
+                preparedStatement.setInt(1, managerID);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    long id = resultSet.getLong("RestaurantID");
+                    String nom = resultSet.getString("NomRestaurant");
+                    String adresse = resultSet.getString("AdresseRestaurant");
+                    String description = resultSet.getString("Description");
+                    double noteMoyenne = resultSet.getDouble("NoteMoyenne");
+                    int isApproved = resultSet.getInt("IsApproved");
+
+                    User manager = us.get(resultSet.getInt("ManagerID"));
+                    if (manager != null) {
+                        System.out.println("this is da manager" + manager.getPrenom());
+                    }
+
+                    Restaurant restaurant = new Restaurant(id, nom, adresse, description, noteMoyenne, isApproved, manager);
+                    list.add(restaurant);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return list;
+    }
+
+
+
     @Override
     public Restaurant get(int id) throws SQLException {
         String sql = "SELECT * FROM Restaurants WHERE RestaurantID=?";
