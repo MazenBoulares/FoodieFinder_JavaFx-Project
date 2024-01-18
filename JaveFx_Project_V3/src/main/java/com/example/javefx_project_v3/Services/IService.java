@@ -1,4 +1,6 @@
 package com.example.javefx_project_v3.Services;
+import com.example.javefx_project_v3.Entitys.User;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -9,5 +11,5 @@ public interface IService<P>{
 
     ArrayList<P> consulterAll() throws SQLException;
 
-    P get(int id) throws SQLException;
+    User get(int id) throws SQLException;
 }

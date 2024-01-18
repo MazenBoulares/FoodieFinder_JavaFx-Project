@@ -130,9 +130,10 @@ public class ServiceRestaurant implements IServiceResto<Restaurant> {
                 double noteMoyenne = resultSet.getDouble("NoteMoyenne");
                 int isApproved = resultSet.getInt("IsApproved");
 
-                User manager= (User) us.get(resultSet.getInt("ManagerID"));
+                User manager= us.get(resultSet.getInt("ManagerID"));
+if(manager!=null){
+                 System.out.println("this is da manager"+ manager.getPrenom());}
 
-                 System.out.println("this is da manager"+ manager);
                 Restaurant restaurant = new Restaurant(id,nom, adresse, description, noteMoyenne, isApproved, manager);
                 list.add(restaurant);
 
