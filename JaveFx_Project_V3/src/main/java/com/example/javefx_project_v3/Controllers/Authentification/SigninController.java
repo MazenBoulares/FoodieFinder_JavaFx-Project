@@ -1,7 +1,8 @@
-package com.example.javefx_project_v3.Controllers;
+package com.example.javefx_project_v3.Controllers.Authentification;
 
 import com.example.javefx_project_v3.Entitys.TypeUSer;
 import com.example.javefx_project_v3.Entitys.Users;
+import com.example.javefx_project_v3.MainApplication;
 import com.example.javefx_project_v3.Services.ServiceUsers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,9 +58,18 @@ public class SigninController implements Initializable {
             stage.close();
         });
     }
-     public void goToLogin(){
+
+
+
+     public void goToLogin() throws IOException {
+         MainApplication.showLoginPage();
 
      }
+
+
+
+
+
     public void signup(){
         System.out.println(nom_fid.getText());
         System.out.println(prenom_fid.getText());
@@ -79,10 +89,10 @@ public class SigninController implements Initializable {
         Parent root;
         Stage stage1 = new Stage();
         try {
-            root = FXMLLoader.load(getClass().getResource("/com/example/demojava/Loginn.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/com/example/javefx_project_v3/Loginn.fxml"));
             Scene scene = new Scene(root);
-            stage1.setMinWidth(1100);
-            stage1.setMinHeight(600);
+//            stage1.setMinWidth(1100);
+//            stage1.setMinHeight(600);
             stage1.setScene(scene);
             stage1.show();
         } catch (IOException e) {

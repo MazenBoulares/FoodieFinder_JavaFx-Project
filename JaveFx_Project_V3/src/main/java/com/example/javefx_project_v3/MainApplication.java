@@ -38,6 +38,7 @@ public class MainApplication extends Application {
     }
 
     public static void showSignUpPage() throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("signin.fxml"));
         Parent root = fxmlLoader.load();
 

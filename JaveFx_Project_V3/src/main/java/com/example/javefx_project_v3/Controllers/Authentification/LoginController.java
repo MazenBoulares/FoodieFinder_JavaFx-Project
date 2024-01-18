@@ -1,5 +1,7 @@
-package com.example.javefx_project_v3.Controllers;
+package com.example.javefx_project_v3.Controllers.Authentification;
 
+import com.example.javefx_project_v3.Entitys.CurrentLoggedIn;
+import com.example.javefx_project_v3.Entitys.LoggedIn;
 import com.example.javefx_project_v3.Entitys.TypeUSer;
 import com.example.javefx_project_v3.Entitys.Users;
 import com.example.javefx_project_v3.MainApplication;
@@ -29,7 +31,14 @@ public class LoginController implements Initializable {
     @FXML
     public Text error_lbl;
     public Button signup_btn;
+
+
     ServiceUsers us = new ServiceUsers();
+    private final CurrentLoggedIn currentLoggedIn = CurrentLoggedIn.getInstance();
+
+
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,7 +49,9 @@ public class LoginController implements Initializable {
             Parent root;
             Stage stage1 = new Stage();
             try {
-                root = FXMLLoader.load(getClass().getResource("/com/example/demojava/Signin.fxml"));
+
+
+                root = FXMLLoader.load(getClass().getResource("/com/example/javefx_project_v3/Signin.fxml"));
                 Scene scene = new Scene(root);
                 stage1.setMinWidth(600);
                 stage1.setMinHeight(400);
@@ -69,7 +80,8 @@ public class LoginController implements Initializable {
 
 
     public void goTosignUp() throws IOException{
-        MainApplication.showSignUpPage();
+//     MainApplication.showSignUpPage();
+
 
     }
     public void loginBtn(){
@@ -85,32 +97,63 @@ public class LoginController implements Initializable {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error Login");
                 alert.setHeaderText(null);
-                alert.setContentText("Password or email invalid please chack them again !!");
+                alert.setContentText("Password or email invalid please check them again !!");
                 alert.showAndWait();
             }else {
+
+                LoggedIn loggedIn = new LoggedIn(u.UserID,u.getNom(),u.getPrenom(),u.getEmail(),u.getMotDePasse(),u.getTypeUtilisateur());
+
+                currentLoggedIn.setLoggedIn(loggedIn);
+
+
+
+
                 if(u.getTypeUtilisateur() == TypeUSer.Admin){
                     //redirection vers admin
-                    stage.setTitle("Admin");
-                    root = FXMLLoader.load(getClass().getResource("/com/example/demojava/hello-view.fxml"));
-                    Stage stage2 = (Stage) email_fid.getScene().getWindow();
-                    stage2.close();
+//                    stage.setTitle("Admin");
+//                    root = FXMLLoader.load(getClass().getResource("/com/example/demojava/hello-view.fxml"));
+//                    Stage stage2 = (Stage) email_fid.getScene().getWindow();
+//                    stage2.close();
+
+                    MainApplication.showEvaluateRestaurantPage();
+
+
+
+
+
                 }else
                 //redirection vers client
                 {
-                    Stage stage2 = (Stage) email_fid.getScene().getWindow();
-                    stage2.close();
-                    stage.setTitle("Client");
-                    root = FXMLLoader.load(getClass().getResource("/com/example/demojava/hello-view.fxml"));
+//                    Stage stage2 = (Stage) email_fid.getScene().getWindow();
+//                    stage2.close();
+//                    stage.setTitle("Client");
+//                    root = FXMLLoader.load(getClass().getResource("/com/example/demojava/hello-view.fxml"));
+
+
+                    MainApplication.showRestaurantPage();
+
                 }
 
-                Scene scene = new Scene(root);
-                stage.setMinWidth(1100);
-                stage.setMinHeight(600);
-                stage.setScene(scene);
-                stage.show();
+//                Scene scene = new Scene(root);
+//                stage.setMinWidth(1100);
+//                stage.setMinHeight(600);
+//                stage.setScene(scene);
+//                stage.show();
             }
+
+
+
+
+
+
+
+
         }catch (Exception e){
             System.out.println(e);
         }
     }
+
+
+
+
 }

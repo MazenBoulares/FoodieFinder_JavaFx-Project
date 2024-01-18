@@ -1,5 +1,6 @@
 package com.example.javefx_project_v3.Controllers;
 
+import com.example.javefx_project_v3.Entitys.CurrentLoggedIn;
 import com.example.javefx_project_v3.Entitys.Restaurant;
 import com.example.javefx_project_v3.MainApplication;
 import com.example.javefx_project_v3.Services.ServiceRestaurant;
@@ -56,8 +57,18 @@ public class RestaurantController {
 
     private final ServiceRestaurant serviceRestaurant = new ServiceRestaurant();
 
+    private final CurrentLoggedIn currentLoggedIn = CurrentLoggedIn.getInstance();
+
     @FXML
     public void initialize() {
+        System.out.println("inisde");
+
+
+        System.out.println(currentLoggedIn.getLoggedIn().getEmail());
+        System.out.println(currentLoggedIn.getLoggedIn().getTypeUtilisateur());
+
+
+
         ObservableList<Restaurant> restaurantList = FXCollections.observableArrayList();
 
         try {

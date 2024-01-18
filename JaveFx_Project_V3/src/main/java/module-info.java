@@ -11,4 +11,6 @@ module com.example.javefx_project_v3.javefx_project_v3 {
     exports com.example.javefx_project_v3;
     exports com.example.javefx_project_v3.Controllers;
     opens com.example.javefx_project_v3.Controllers to javafx.fxml;
+    exports com.example.javefx_project_v3.Controllers.Authentification;
+    opens com.example.javefx_project_v3.Controllers.Authentification to javafx.fxml;
 }
