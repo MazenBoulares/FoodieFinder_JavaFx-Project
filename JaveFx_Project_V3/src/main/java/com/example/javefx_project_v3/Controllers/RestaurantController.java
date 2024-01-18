@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -55,6 +56,17 @@ public class RestaurantController {
     @FXML
     private TableColumn<Restaurant, Void> operationsColumn;
 
+
+
+    @FXML
+    private Text authName;
+
+    @FXML
+    private Text authuserType;
+
+
+
+
     private final ServiceRestaurant serviceRestaurant = new ServiceRestaurant();
 
     private final CurrentLoggedIn currentLoggedIn = CurrentLoggedIn.getInstance();
@@ -66,6 +78,10 @@ public class RestaurantController {
 
         System.out.println(currentLoggedIn.getLoggedIn().getEmail());
         System.out.println(currentLoggedIn.getLoggedIn().getTypeUtilisateur());
+
+        authName.setText( currentLoggedIn.getLoggedIn().getPrenom()+" "+currentLoggedIn.getLoggedIn().getNom());
+
+        authuserType.setText(String.valueOf(currentLoggedIn.getLoggedIn().getTypeUtilisateur()));
 
 
 

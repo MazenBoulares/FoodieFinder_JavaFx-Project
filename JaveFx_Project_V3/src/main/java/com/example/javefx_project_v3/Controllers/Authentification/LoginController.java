@@ -3,7 +3,7 @@ package com.example.javefx_project_v3.Controllers.Authentification;
 import com.example.javefx_project_v3.Entitys.CurrentLoggedIn;
 import com.example.javefx_project_v3.Entitys.LoggedIn;
 import com.example.javefx_project_v3.Entitys.TypeUSer;
-import com.example.javefx_project_v3.Entitys.Users;
+import com.example.javefx_project_v3.Entitys.User;
 import com.example.javefx_project_v3.MainApplication;
 import com.example.javefx_project_v3.Services.ServiceUsers;
 import javafx.fxml.FXML;
@@ -88,7 +88,7 @@ public class LoginController implements Initializable {
         System.out.println(email_fid.getText());
         System.out.println(password_fid.getText());
         try {
-           Users u =  us.getUserByEmail(email_fid.getText());
+           User u =  us.getUserByEmail(email_fid.getText());
             System.out.println(u);
             Parent root;
             Stage stage = new Stage();

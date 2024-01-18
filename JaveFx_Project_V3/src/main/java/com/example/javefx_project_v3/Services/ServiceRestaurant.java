@@ -1,6 +1,8 @@
 package com.example.javefx_project_v3.Services;
 
+import com.example.javefx_project_v3.Entitys.CurrentLoggedIn;
 import com.example.javefx_project_v3.Entitys.Restaurant;
+import com.example.javefx_project_v3.Entitys.User;
 import com.example.javefx_project_v3.Utils.DataSource;
 
 import java.sql.*;
@@ -9,23 +11,58 @@ public class ServiceRestaurant implements IServiceResto<Restaurant> {
     Connection con = DataSource.getInstance().getCon();
     private Statement ste;
 
+    private final CurrentLoggedIn currentLoggedIn = CurrentLoggedIn.getInstance();
+
+   private IService us;
+
     public ServiceRestaurant() {
         try {
+
+            us= new ServiceUsers();
+
             ste = con.createStatement();
         } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
+//    @Override
+//    public void ajouter(Restaurant restaurant) throws SQLException {
+//        String sql = "INSERT INTO Restaurants (NomRestaurant, AdresseRestaurant, Description, NoteMoyenne) VALUES (?, ?, ?, ?)";
+//
+//        try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//            preparedStatement.setString(1, restaurant.getNomRestaurant());
+//            preparedStatement.setString(2, restaurant.getAdresseRestaurant());
+//            preparedStatement.setString(3, restaurant.getDescription());
+//            preparedStatement.setDouble(4, restaurant.getNoteMoyenne());
+//
+//            preparedStatement.executeUpdate();
+//
+//            // Récupérer l'ID généré automatiquement
+//            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+//                if (generatedKeys.next()) {
+//                    restaurant.setRestaurantID(generatedKeys.getLong(1));
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Handle the exception appropriately
+//        }
+//    }
+
+
     @Override
     public void ajouter(Restaurant restaurant) throws SQLException {
-        String sql = "INSERT INTO Restaurants (NomRestaurant, AdresseRestaurant, Description, NoteMoyenne) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Restaurants (NomRestaurant, AdresseRestaurant, Description, NoteMoyenne, ManagerID) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, restaurant.getNomRestaurant());
             preparedStatement.setString(2, restaurant.getAdresseRestaurant());
             preparedStatement.setString(3, restaurant.getDescription());
             preparedStatement.setDouble(4, restaurant.getNoteMoyenne());
+
+
+
+            preparedStatement.setLong(5, currentLoggedIn.getLoggedIn().getUserID()); // Assuming getId() returns the user ID
 
             preparedStatement.executeUpdate();
 
@@ -36,9 +73,17 @@ public class ServiceRestaurant implements IServiceResto<Restaurant> {
                 }
             }
         } catch (SQLException e) {
+
+            System.out.println("exception dans l'ajout service");
             e.printStackTrace(); // Handle the exception appropriately
         }
     }
+
+
+
+
+
+
 
     @Override
     public void update(Restaurant restaurant) throws SQLException {
@@ -85,8 +130,13 @@ public class ServiceRestaurant implements IServiceResto<Restaurant> {
                 double noteMoyenne = resultSet.getDouble("NoteMoyenne");
                 int isApproved = resultSet.getInt("IsApproved");
 
-                Restaurant restaurant = new Restaurant(id,nom, adresse, description, noteMoyenne, isApproved);
+                User manager= (User) us.get(resultSet.getInt("ManagerID"));
+
+                 System.out.println("this is da manager"+ manager);
+                Restaurant restaurant = new Restaurant(id,nom, adresse, description, noteMoyenne, isApproved, manager);
                 list.add(restaurant);
+
+
             }
         } catch (SQLException e) {
             System.out.println(e);

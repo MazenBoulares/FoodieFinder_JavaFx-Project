@@ -14,12 +14,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="758.0" prefWidth="842.0" stylesheets="@utils/manage-restaurants.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javefx_project_v3.Controllers.EvaluateRestaurantController">
+<AnchorPane prefHeight="758.0" prefWidth="842.0" stylesheets="@styles/manage-restaurants.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javefx_project_v3.Controllers.EvaluateRestaurantController">
     <children>
 
-        <AnchorPane layoutX="218.0" layoutY="57.0" prefHeight="690.0" prefWidth="598.0" stylesheets="@utils/manage-restaurants.css">
+        <AnchorPane layoutX="218.0" layoutY="57.0" prefHeight="690.0" prefWidth="598.0" stylesheets="@styles/manage-restaurants.css">
             <children>
-                <TableView fx:id="restaurantTableView" layoutY="178.0" prefHeight="465.0" prefWidth="598.0" stylesheets="@utils/table-style.css">
+                <TableView fx:id="restaurantTableView" layoutY="178.0" prefHeight="465.0" prefWidth="598.0" stylesheets="@styles/table-style.css">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="40.79998779296875" text="ID" />
                         <TableColumn fx:id="nomColumn" prefWidth="120.0" text="Name" />

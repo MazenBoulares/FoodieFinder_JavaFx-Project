@@ -1,6 +1,6 @@
 package com.example.javefx_project_v3.Entitys;
 
-public class Users {
+public class User {
     public int UserID ;
     public String Nom ;
     public String Prenom ;
@@ -8,7 +8,7 @@ public class Users {
     public  String MotDePasse ;
     public TypeUSer TypeUtilisateur ;
 
-    public Users(int userID, String nom, String prenom, String email, String motDePasse, TypeUSer typeUtilisateur) {
+    public User(int userID, String nom, String prenom, String email, String motDePasse, TypeUSer typeUtilisateur) {
         UserID = userID;
         Nom = nom;
         Prenom = prenom;
@@ -17,7 +17,7 @@ public class Users {
         TypeUtilisateur = typeUtilisateur;
     }
 
-    public Users() {
+    public User() {
 
     }
 

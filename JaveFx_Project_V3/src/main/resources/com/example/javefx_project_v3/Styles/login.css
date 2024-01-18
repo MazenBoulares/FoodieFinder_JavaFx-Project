@@ -4,7 +4,7 @@
 
 /*Logo container styles*/
 .login_logo_container {
-    -fx-background-color: rgba(170, 208, 166, 0.76);
+    -fx-background-color: rgb(17, 17, 82);
     -fx-alignment: center;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .login_logo_container FontAwesomeIconView {
-    -fx-fill: #ECF39E;
+    -fx-fill: #f67e7e;
 
 }
 
@@ -30,7 +30,7 @@
 .login_form_container_title {
     -fx-text-alignment: center;
     -fx-font-size: 3em;
-    -fx-fill: #197788;
+    -fx-fill: #3a1152;
     -fx-font-weight: bold;
 }
 .login_form_container Label{
@@ -44,8 +44,8 @@
 }
 
 .login_form_container Button {
-    -fx-background-color: rgba(170, 208, 166, 0.76);
-    -fx-text-fill: #197788;
+    -fx-background-color: linear-gradient(to left, #111152, #dc3858);
+    -fx-text-fill: #ffffff;
     -fx-pref-width: 350;
     -fx-pref-height: 30;
     -fx-font-size: 1.2em;
@@ -54,8 +54,8 @@
 }
 
 .signup_button {
-    -fx-background-color: rgba(170, 208, 166, 0.34);
-    -fx-text-fill: #197788;
+    -fx-background-color: linear-gradient(to left, #111152, #dc3858);
+    -fx-text-fill: #ffffff;
     -fx-pref-width: 100;
     -fx-pref-height: 30;
     -fx-font-size: 1.2em;}
@@ -64,6 +64,6 @@
 }
 
 .error_label {
-    -fx-text-fill:rgba(170, 208, 166, 0.76);
+    -fx-text-fill: rgb(220, 56, 88);
 
 }

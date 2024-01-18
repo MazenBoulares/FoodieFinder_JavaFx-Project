@@ -43,7 +43,7 @@ public class MainApplication extends Application {
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root);
-        primaryStage.setTitle("Login");
+        primaryStage.setTitle("Sign Up");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -77,13 +77,6 @@ public class MainApplication extends Application {
 
 
 
-
-//
-
-
-    // Add similar methods for other pages
-
-    // ...
 
     public static Stage getPrimaryStage() {
         return primaryStage;

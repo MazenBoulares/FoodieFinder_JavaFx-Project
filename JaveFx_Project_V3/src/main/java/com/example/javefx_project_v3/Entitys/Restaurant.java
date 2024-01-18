@@ -10,7 +10,7 @@ public class Restaurant {
     public Double noteMoyenne;
 
 
-    private UserMazen manager;
+    private User manager;
 
     
 
@@ -21,7 +21,7 @@ public class Restaurant {
     }
 
     public Restaurant(String nomRestaurant, String adresseRestaurant, String description, Double noteMoyenne
-//                      User user
+//                   User user
 
     ) {
         this.nomRestaurant = nomRestaurant;
@@ -44,6 +44,7 @@ public class Restaurant {
 
 
 
+
     public Restaurant(Long restaurantID, String nomRestaurant, String adresseRestaurant, String description, Double noteMoyenne, int isApproved) {
         this.restaurantID=restaurantID;
         this.nomRestaurant = nomRestaurant;
@@ -52,6 +53,25 @@ public class Restaurant {
         this.noteMoyenne = noteMoyenne;
         this.isApproved= isApproved;
     }
+
+    public User getManager() {
+        return manager;
+    }
+
+    public void setManager(User manager) {
+        this.manager = manager;
+    }
+
+    public Restaurant(Long restaurantID, String nomRestaurant, String adresseRestaurant, String description, Double noteMoyenne, int isApproved, User manager) {
+        this.restaurantID=restaurantID;
+        this.nomRestaurant = nomRestaurant;
+        this.adresseRestaurant = adresseRestaurant;
+        this.description = description;
+        this.noteMoyenne = noteMoyenne;
+        this.isApproved= isApproved;
+        this.manager= manager;
+    }
+
 
 
     public Long getRestaurantID() {

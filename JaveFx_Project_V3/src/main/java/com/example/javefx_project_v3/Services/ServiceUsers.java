@@ -1,7 +1,7 @@
 package com.example.javefx_project_v3.Services;
 
 import com.example.javefx_project_v3.Entitys.TypeUSer;
-import com.example.javefx_project_v3.Entitys.Users;
+import com.example.javefx_project_v3.Entitys.User;
 import com.example.javefx_project_v3.Utils.DataSource;
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class ServiceUsers implements com.example.javefx_project_v3.Services.IService<Users> {
+public class ServiceUsers implements com.example.javefx_project_v3.Services.IService<User> {
     private Connection con= DataSource.getInstance().getCon();
 
     private Statement ste;
@@ -26,7 +26,7 @@ public class ServiceUsers implements com.example.javefx_project_v3.Services.ISer
     }
 
     @Override
-    public void ajouter(Users users) throws SQLException
+    public void ajouter(User users) throws SQLException
     {
         String req="INSERT INTO users (`UserID`, `Nom`, `Prenom`,`Email`,  `MotDePasse`, `TypeUtilisateur`)" +
                 " VALUES (NULL, '"+users.getNom()+"', '"+users.getPrenom()+"', '"+users.getEmail()+"','"+users.getMotDePasse()+"','"+users.getTypeUtilisateur()+"');";
@@ -34,7 +34,7 @@ public class ServiceUsers implements com.example.javefx_project_v3.Services.ISer
         int res=   ste.executeUpdate(req);
     }
     @Override
-    public void update(Users users) throws SQLException
+    public void update(User users) throws SQLException
     {
         String req = "UPDATE users SET Nom = '" + users.getNom() + "',  " + "Prenom = '" + users.getPrenom() + "', " +
                 "Email = '" + users.getEmail() +"', " +"MotDePasse = '" + users.getMotDePasse() +"', " +"TypeUtilisateur = '"+users.getTypeUtilisateur() +
@@ -51,8 +51,8 @@ public class ServiceUsers implements com.example.javefx_project_v3.Services.ISer
         int res = ste.executeUpdate(req);
     }
     @Override
-    public ArrayList<Users> consulterAll() throws SQLException {
-        ArrayList<Users> list = new ArrayList<>();
+    public ArrayList<User> consulterAll() throws SQLException {
+        ArrayList<User> list = new ArrayList<>();
         try {
             ResultSet resultSet = ste.executeQuery("select * from users");
             while (resultSet.next()) {
@@ -62,7 +62,7 @@ public class ServiceUsers implements com.example.javefx_project_v3.Services.ISer
                 String Email  = resultSet.getString(4);
                 String MotDePasse  = resultSet.getString(5);
                 TypeUSer TypeUtilisateur  = TypeUSer.valueOf(resultSet.getString(6));
-                Users p = new Users(UserID, Nom, Prenom, Email, MotDePasse, TypeUtilisateur);
+                User p = new User(UserID, Nom, Prenom, Email, MotDePasse, TypeUtilisateur);
                 list.add(p);
             }
         } catch (SQLException e) {
@@ -73,7 +73,7 @@ public class ServiceUsers implements com.example.javefx_project_v3.Services.ISer
 
 
     @Override
-    public Users get(int id) throws SQLException {
+    public User get(int id) throws SQLException {
         String req = "SELECT * FROM users WHERE UserID = " + id;
         ResultSet resultSet = ste.executeQuery(req);
         if (resultSet.next()) {
@@ -83,19 +83,19 @@ public class ServiceUsers implements com.example.javefx_project_v3.Services.ISer
             String Email = resultSet.getString(4);
             String MotDePasse = resultSet.getString(5);
             TypeUSer TypeUtilisateur = TypeUSer.valueOf(resultSet.getString(6));
-            Users p = new Users(UserID, Nom, Prenom, Email, MotDePasse, TypeUtilisateur);
+            User p = new User(UserID, Nom, Prenom, Email, MotDePasse, TypeUtilisateur);
             return p;
         }
         return null;
     }
-    public Users getUserByEmail(String email) throws SQLException {
+    public User getUserByEmail(String email) throws SQLException {
         String req = "SELECT * FROM users WHERE Email = '" + email + "'";
         System.out.println(req);
 
         ResultSet resultSet = ste.executeQuery(req);
 
         if (resultSet.next()) {
-            Users user = new Users();
+            User user = new User();
             user.setUserID(resultSet.getInt("UserID"));
             user.setNom(resultSet.getString("Nom"));
             user.setPrenom(resultSet.getString("Prenom"));

@@ -1,7 +1,7 @@
 package com.example.javefx_project_v3.Controllers.Authentification;
 
 import com.example.javefx_project_v3.Entitys.TypeUSer;
-import com.example.javefx_project_v3.Entitys.Users;
+import com.example.javefx_project_v3.Entitys.User;
 import com.example.javefx_project_v3.MainApplication;
 import com.example.javefx_project_v3.Services.ServiceUsers;
 import javafx.fxml.FXML;
@@ -75,7 +75,7 @@ public class SigninController implements Initializable {
         System.out.println(prenom_fid.getText());
         System.out.println(password_sign.getText());
         System.out.println(email_sign.getText());
-        Users u = new Users();
+        User u = new User();
         u.setNom(nom_fid.getText());
         u.setEmail(email_sign.getText());
         u.setPrenom(prenom_fid.getText());

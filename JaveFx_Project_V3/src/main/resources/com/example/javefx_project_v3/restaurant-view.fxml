@@ -12,15 +12,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="758.0" prefWidth="842.0" stylesheets="@utils/manage-restaurants.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javefx_project_v3.Controllers.RestaurantController">
+<AnchorPane prefHeight="758.0" prefWidth="842.0" stylesheets="@styles/manage-restaurants.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javefx_project_v3.Controllers.RestaurantController">
     <children>
 
-        <AnchorPane layoutX="218.0" layoutY="57.0" prefHeight="690.0" prefWidth="598.0" stylesheets="@utils/manage-restaurants.css">
+        <AnchorPane layoutX="218.0" layoutY="57.0" prefHeight="690.0" prefWidth="598.0" stylesheets="@styles/manage-restaurants.css">
             <children>
-                <TableView fx:id="restaurantTableView" layoutY="349.0" prefHeight="327.0" prefWidth="598.0" stylesheets="@utils/table-style.css">
+                <TableView fx:id="restaurantTableView" layoutY="349.0" prefHeight="327.0" prefWidth="598.0" stylesheets="@styles/table-style.css">
                     <columns>
                         <TableColumn fx:id="idColumn" prefWidth="40.79998779296875" text="ID" />
                         <TableColumn fx:id="nomColumn" prefWidth="120.0" text="Name" />
@@ -143,6 +144,43 @@
                   <Insets left="17.0" top="7.0" />
                </HBox.margin>
             </ImageView>
+            <ImageView fitHeight="29.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@utils/icons8-test-account-30.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="450.0" top="6.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="authName">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="6.0" />
+                     </VBox.margin>
+                  </Text>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="authuserType">
+                           <font>
+                              <Font size="9.0" />
+                           </font>
+                        </Text>
+                        <Circle fill="#3ec94e" radius="4.0" stroke="BLACK" strokeType="INSIDE">
+                           <HBox.margin>
+                              <Insets left="2.0" />
+                           </HBox.margin>
+                        </Circle>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </VBox>
          </children>
          <padding>
             <Insets bottom="10.0" top="5.0" />
