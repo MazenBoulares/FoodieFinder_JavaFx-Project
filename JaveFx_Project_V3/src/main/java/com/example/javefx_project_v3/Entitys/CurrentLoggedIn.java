@@ -5,7 +5,7 @@ public class CurrentLoggedIn {
     private LoggedIn loggedIn;
 
     private CurrentLoggedIn() {
-        // Private constructor to prevent instantiation
+
     }
 
     public static synchronized CurrentLoggedIn getInstance() {
